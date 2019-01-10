@@ -7,21 +7,55 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 	<link rel="stylesheet" type="text/css" href="/css/style.css">
 </head>
-<body>
-	<div class="container">
+<body onload="getMovies()">
+	<div class="container-fluid">
 		<div class="row">
 			<div class="col-12 col-md-6"> <!-- Bootstrap classes can be modified as desired -->
 				<h2>Movies</h2>
-				<ul id="moviesList">
-
+				<ul>
+					<div style="margin-top:1em;text-align:center">
+						<h2>Latest Movies Information</h2>
+						<span id="error"></span>
+						<table class="table table-dark table-striped" id="moviesList">
+								<thead>
+								  <tr>
+									<th>ID</th>
+									<th>Title Name</th>
+									<th>Poster</th>
+									<th>Favourite</th>
+								  </tr>
+								</thead>
+								<tbody>
+									<!-- Fetch the contacts information from db and display here -->                    
+								</tbody>
+						</table>
+					
+					</div>
+				
 					<!-- Fill the Movies data here -->
 
 				</ul>
 			</div>
 			<div class="col-12 col-md-6"> <!-- Bootstrap classes can be modified as desired -->
 				<h2>Favourites</h2>
-				<ul id="favouritesList">
-						
+				<ul>
+					<table class="table table-dark table-striped" id="favouritesList">
+						<thead>
+						  <tr>
+							<th>ID</th>
+							<th>Title Name</th>
+							<th>Poster</th>
+						  </tr>
+						</thead>
+						<tbody>
+							<!-- Fetch the contacts information from db and display here -->                    
+						</tbody>
+				</table>
+					
+
+
+
+
 					<!-- Fill the Favourites data here -->	
 
 				</ul>
@@ -30,8 +64,8 @@
 	</div>
 	<script type="text/javascript" src="/js/script.js"></script>
 	<script type="text/javascript">
-		getMovies();
-		getFavourites();
+		// getMovies();
+		// getFavourites();
 	</script>
 </body>
 </html>
