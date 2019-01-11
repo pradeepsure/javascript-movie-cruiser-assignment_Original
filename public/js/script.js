@@ -18,8 +18,9 @@ function getMovies() {
   }).then(moviesResponse => {
     moviesList = moviesResponse;
     displayMovies(moviesList);
+    return moviesResponse;
   }).catch(error => {
-    const errorEle = document.getElementById('error');
+    const errorEle = document.getElementById('errorExclusiveMovie');
     errorEle.innerHTML = `<h2 style='color:red'>${error.message}</h2>`
   })
 }
@@ -113,7 +114,9 @@ function getFavourites() {
       return Promise.reject(new Error('Some internal error occured...'));
     }
   }).then(favResponse => {
-    displayFavourites(favResponse);
+    favouriteList=favResponse;
+    displayFavourites(favouriteList);
+    return favouriteList;
   }).catch(error => {
     const errorEle = document.getElementById('error');
     errorEle.innerHTML = `<h5 style='color:red'>${error.message}</h5>`

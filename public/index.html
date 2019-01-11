@@ -1,62 +1,66 @@
 <!DOCTYPE html>
 <html>
+
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Movie Cruiser</title>
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+	 crossorigin="anonymous">
 	<link rel="stylesheet" type="text/css" href="/css/style.css">
 </head>
-<body>
+
+<body> 
+		<!-- onload="getMovies()" -->
 	<div class="container-fluid">
 		<div class="row">
-			<div class="col-12 col-md-6"> <!-- Bootstrap classes can be modified as desired -->
+			<div class="col-12 col-md-6">
+				<!-- Bootstrap classes can be modified as desired -->
 				<h2>Movies</h2>
 				<ul>
 					<div style="margin-top:1em;text-align:center">
 						<h2>Latest Movies Information</h2>
 						<span id="error"></span>
+						<span id="alreadyAdded"></span>
 						<table class="table table-dark table-striped" id="moviesList">
-								<thead>
-								  <tr>
+							<thead>
+								<tr>
 									<th>ID</th>
 									<th>Title Name</th>
 									<th>Poster</th>
 									<th>Favourite</th>
-								  </tr>
-								</thead>
-								<tbody>
-									<!-- Fetch the contacts information from db and display here -->                    
-								</tbody>
+								</tr>
+							</thead>
+							<tbody>
+							</tbody>
 						</table>
-					
 					</div>
-				
 					<!-- Fill the Movies data here -->
 
 				</ul>
 			</div>
-			<div class="col-12 col-md-6"> <!-- Bootstrap classes can be modified as desired -->
+			<div class="col-12 col-md-6">
+				<!-- Bootstrap classes can be modified as desired -->
 				<h2>Favourites</h2>
 				<ul>
 					<table class="table table-dark table-striped" id="favouritesList">
 						<thead>
-						  <tr>
-							<th>ID</th>
-							<th>Title Name</th>
-							<th>Poster</th>
-						  </tr>
+							<tr>
+								<th>ID</th>
+								<th>Title Name</th>
+								<th>Poster</th>
+							</tr>
 						</thead>
 						<tbody>
-							<!-- Fetch the contacts information from db and display here -->                    
+
 						</tbody>
-				</table>
-					
+					</table>
 
 
 
 
-					<!-- Fill the Favourites data here -->	
+
+					<!-- Fill the Favourites data here -->
 
 				</ul>
 			</div>
@@ -68,4 +72,5 @@
 		getFavourites();
 	</script>
 </body>
+
 </html>

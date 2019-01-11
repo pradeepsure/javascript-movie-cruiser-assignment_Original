@@ -20,6 +20,23 @@
     }
   ],
   "favourites": [
-    
+    {
+      "id": 1,
+      "title": "F2",
+      "posterPath": "../images/F2.jfif",
+      "favourite": false
+    },
+    {
+      "id": 2,
+      "title": "Sankranti",
+      "posterPath": "../images/sankranti.jfif",
+      "favourite": true
+    },
+    {
+      "id": 3,
+      "title": "Hello",
+      "posterPath": "../images/Hello.jfif",
+      "favourite": true
+    }
   ]
 }
