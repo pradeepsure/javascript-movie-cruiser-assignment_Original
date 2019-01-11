@@ -3,7 +3,6 @@ let favouriteList = [];
 
 function getMovies() {
   fetch('http://localhost:3000/movies').then(response => {
-    //  console.log(response);
     if (response.ok) {
       return response.json();
     }
@@ -60,26 +59,25 @@ function displayFavourites(favouriteList) {
     </tr>  
     `
   });
-
   tableBodyEle.innerHTML = tableBodyHTMLString;
 }
 
 
 function addFavourite(id) {
-  
-  
   let movie = moviesList.find(movie =>{
     if(movie.id == id){
         return movie;
     }
-});
-let favExists = favouriteList.find(favMovie => {
+  });
+  let favExists = favouriteList.find(favMovie => {
   if( favMovie.id == movie.id ){
       return favMovie;
   }
-});
+  });
 if(favExists) {
-  return Promise.reject(new Error('Movie is already added to favourites'));
+    // let errorEle = document.getElementById('alreadyAdded');
+    // errorEle.innerHTML = `<h5 style='color:red'>Movie is already added to favourites</h5>`
+    return Promise.reject(new Error('Movie is already added to favourites'));
 }
 else{
   return fetch(`http://localhost:3000/favourites`,{
@@ -97,34 +95,7 @@ else{
         displayFavourites(favouriteList);
         return addedMovieToFav;
     })
-}
-
-  // const index = moviesList.findIndex(movie => movie.id === movieId);
-  // let id = moviesList[index].id;
-  // let title = moviesList[index].title;
-  // let posterPath = moviesList[index].posterPath;
-  // const moviee = {
-  //   id: id,
-  //   title: title,
-  //   posterPath: posterPath
-  // };
-  // //Fetch POST
-  // fetch('http://localhost:3000/favourites', {
-  //   method: 'POST',
-  //   headers: {
-  //     'content-type': 'application/json'
-  //   },
-  //   body: JSON.stringify(moviee)
-  // }).then(response => {
-  //   if (response.ok) {
-  //     return response.json();
-  //   }
-  // }).then(addedMovie => {addedMovie; getFavourites();
-  // }).catch(error => {
-  //    const errorEle = document.getElementById('error');
-  //    errorEle.innerHTML = `<h5 style='color:red'>${error.message}</h5>`
-  // })
-  
+} 
 }
 //getFavourites
 function getFavourites() {
