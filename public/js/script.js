@@ -20,7 +20,7 @@ function getMovies() {
     displayMovies(moviesList);
     return moviesResponse;
   }).catch(error => {
-    const errorEle = document.getElementById('errorExclusiveMovie');
+    const errorEle = document.getElementById('error');
     errorEle.innerHTML = `<h2 style='color:red'>${error.message}</h2>`
   })
 }
