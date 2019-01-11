@@ -1,128 +1,122 @@
 let moviesList = [];
-let favouriteList = [];
-
+let favouriteMovies = [];
 function getMovies() {
-  fetch('http://localhost:3000/movies').then(response => {
-    if (response.ok) {
-      return response.json();
-    }
-    else if (response.status == 404) {
-      return Promise.reject(new Error('Invalid URL'))
-    }
-    else if (response.status == 401) {
-      return Promise.reject(new Error('UnAuthorized User...'));
-    }
-    else {
-      return Promise.reject(new Error('Some internal error occured...'));
-    }
-  }).then(moviesResponse => {
-    moviesList = moviesResponse;
-    displayMovies(moviesList);
-    return moviesResponse;
-  }).catch(error => {
-    const errorEle = document.getElementById('error');
-    errorEle.innerHTML = `<h2 style='color:red'>${error.message}</h2>`
-  })
+	return fetch('http://localhost:3000/movies').then(
+		response =>{
+		  if(response.ok){         
+				  return response.json();          
+		  }
+		  else if(response.status == 404){
+			  return Promise.reject(new Error('Invalid URL'))
+		  }
+		  else if(response.status == 401){
+			  return Promise.reject(new Error('UnAuthorized User...'));
+		  }
+		  else{
+			  return Promise.reject(new Error('Internal Server Error'));
+		  } }).then(moviesListResponse =>{
+			moviesList = moviesListResponse;  
+			  displaymoviesList(moviesList);
+			  return moviesListResponse;
+	  	}).catch(error =>{const errorEle = document.getElementById('errormovieName');
+			errorEle.innerHTML = `<h2 style='color:red'>${error.message}</h2>`
+			return error;
+	  	})
 }
 
-function displayMovies(moviesList) {
-  //Display the movies in UI
-  const tableEle = document.getElementById('moviesList');
-  const tableBodyEle = tableEle.getElementsByTagName('tbody')[0];
-  let tableBodyHTMLString = '';
-  moviesList.forEach(movie => {
-    tableBodyHTMLString += `
-			<tr>
-				<td>${movie.id}</td>
-				<td>${movie.title}</td>
-        <td><img src="${movie.posterPath}"/></td>
-        <td><button class='btn btn-primary' onclick='addFavourite(${movie.id})'>Favourite</button></td>
-			</tr>  
-		  `
-  });
-
-  tableBodyEle.innerHTML = tableBodyHTMLString;
+function getFavourites() {
+	return fetch('http://localhost:3000/favourites').then(response =>{
+		  if(response.ok){         
+				  return response.json();          
+		  }
+		  else if(response.status == 404){
+			  return Promise.reject(new Error('Invalid URL'))
+		  }
+		  else if(response.status == 401){
+			  return Promise.reject(new Error('UnAuthorized User...'));
+		  }
+		  else{
+			  return Promise.reject(new Error('Internal Server Error'));
+		  }}).then(favouriteMoviesResponse =>{
+			favouriteMovies = favouriteMoviesResponse;  
+			displayFavouriteMovies(favouriteMovies);
+			return favouriteMoviesResponse;
+		}).catch(error =>{
+			const errorEle = document.getElementById('errorFavouriteMovie');
+			errorEle.innerHTML = `<h2 style='color:red'>${error.message}</h2>`
+			return error;
+	  	}
+	  )
 }
-
-function displayFavourites(favouriteList) {
-  //Display the movies in UI
-  const tableEle = document.getElementById('favouritesList');
-  const tableBodyEle = tableEle.getElementsByTagName('tbody')[0];
-  let tableBodyHTMLString = '';
-  console.log('favouriteList---->', favouriteList);
-
-  favouriteList.forEach(favouriteMovie => {
-    tableBodyHTMLString += `
-    <tr>
-      <td>${favouriteMovie.id}</td>
-      <td>${favouriteMovie.title}</td>
-      <td><img src="${favouriteMovie.posterPath}"/></td>
-    </tr>  
-    `
-  });
-  tableBodyEle.innerHTML = tableBodyHTMLString;
-}
-
 
 function addFavourite(id) {
-  let movie = moviesList.find(movie =>{
-    if(movie.id == id){
-        return movie;
-    }
-  });
-  let favExists = favouriteList.find(favMovie => {
-  if( favMovie.id == movie.id ){
-      return favMovie;
-  }
-  });
-if(favExists) {
-    // let errorEle = document.getElementById('alreadyAdded');
-    // errorEle.innerHTML = `<h5 style='color:red'>Movie is already added to favourites</h5>`
-    return Promise.reject(new Error('Movie is already added to favourites'));
-}
-else{
-  return fetch(`http://localhost:3000/favourites`,{
+    let movieName = moviesList.find(movie =>{
+        if(movie.id == id){
+            return movie;
+        }
+    });
+    let favExists = favouriteMovies.find(favMovie => {
+        if( favMovie.id == movieName.id ){
+            return favMovie;
+        }
+    });
+    if(favExists) {
+        return Promise.reject(new Error('Movie is already added to favourites'));
+    }else{
+		return fetch(`http://localhost:3000/favourites`,{
         method: 'POST',
         headers: {
             'content-type': 'application/json'
         },
-        body: JSON.stringify(movie)
-    }).then(response => {
-        if(response.ok){
-            return response.json();
-        }
-    }).then(addedMovieToFav => {
-      favouriteList.push(addedMovieToFav);
-        displayFavourites(favouriteList);
-        return addedMovieToFav;
-    })
-} 
+        body: JSON.stringify(movieName)
+		}
+		).then(response => {
+				if(response.ok){
+					return response.json();
+				}
+			}
+		).then(addedMovie => {
+				favouriteMovies.push(addedMovie);
+				displayFavouriteMovies(favouriteMovies);
+				return favouriteMovies;
+			}
+		)
+	}
 }
-//getFavourites
-function getFavourites() {
-  fetch('http://localhost:3000/favourites').then(response => {
-    if (response.ok) {
-      return response.json();
-    }
-    else if (response.status == 404) {
-      return Promise.reject(new Error('Invalid URL'))
-    }
-    else if (response.status == 401) {
-      return Promise.reject(new Error('UnAuthorized User...'));
-    }
-    else {
-      return Promise.reject(new Error('Some internal error occured...'));
-    }
-  }).then(favResponse => {
-    favouriteList=favResponse;
-    displayFavourites(favouriteList);
-    return favouriteList;
-  }).catch(error => {
-    const errorEle = document.getElementById('error');
-    errorEle.innerHTML = `<h5 style='color:red'>${error.message}</h5>`
-  })
+
+function displaymoviesList(moviesList){
+	const ele =   document.getElementById('moviesList');
+	let htmlString = '';
+	
+	moviesList.forEach(movie => {
+		htmlString += `
+        SerialNumber<li>${movie.id}</li>
+			  Title<li>${movie.title}</li>
+        <img src='${movie.posterPath}' />
+        <li><button class='btn btn-primary' onclick='addFavourite(${movie.id})'>AddToFavourites</button><li>
+		`
+	});
   
+	ele.innerHTML = htmlString;
 }
+
+function displayFavouriteMovies(favouriteMovies){
+	//DOM manipulation
+	const ele =   document.getElementById('favouritesList');
+	let htmlString = '';
+	
+	favouriteMovies.forEach(movie => {
+		htmlString += `
+        SerialNumber<li>${movie.id}</li>
+			  <li>${movie.title}</li>
+			  <img src='${movie.posterPath}' />
+		`
+	});
+  
+	ele.innerHTML = htmlString;
+}
+
+
 module.exports = {
 	getMovies,
 	getFavourites,

@@ -10,59 +10,25 @@
 	<link rel="stylesheet" type="text/css" href="/css/style.css">
 </head>
 
-<body> 
-		<!-- onload="getMovies()" -->
-	<div class="container-fluid">
+<body>
+	<!-- onload="getMovies()" -->
+	<div class="container">
 		<div class="row">
 			<div class="col-12 col-md-6">
 				<!-- Bootstrap classes can be modified as desired -->
 				<h2>Movies</h2>
-				<ul>
-					<div style="margin-top:1em;text-align:center">
-						<h2>Latest Movies Information</h2>
-						<span id="error"></span>
-						<span id="alreadyAdded"></span>
-						<table class="table table-dark table-striped" id="moviesList">
-							<thead>
-								<tr>
-									<th>ID</th>
-									<th>Title Name</th>
-									<th>Poster</th>
-									<th>Favourite</th>
-								</tr>
-							</thead>
-							<tbody>
-							</tbody>
-						</table>
-					</div>
+				<p id="exclusiveMovie"></p>
+				<ul id="moviesList">
+
 					<!-- Fill the Movies data here -->
 
 				</ul>
 			</div>
 			<div class="col-12 col-md-6">
 				<!-- Bootstrap classes can be modified as desired -->
-				<h2>Favourites</h2>
-				<ul>
-					<table class="table table-dark table-striped" id="favouritesList">
-						<thead>
-							<tr>
-								<th>ID</th>
-								<th>Title Name</th>
-								<th>Poster</th>
-							</tr>
-						</thead>
-						<tbody>
-
-						</tbody>
-					</table>
-
-
-
-
-
-					<!-- Fill the Favourites data here -->
-
-				</ul>
+				<h2>Favourite Movies</h2>
+				<p id="favouriteMovie"></p>
+				<ul id="favouritesList">
 			</div>
 		</div>
 	</div>
